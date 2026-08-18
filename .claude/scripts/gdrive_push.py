@@ -298,7 +298,8 @@ def main():
     deck_pdf = os.path.splitext(deck_ppt)[0] + ".pdf"
     lg_docx = newest(os.path.join(cw, "LG-*.docx")); lg_pdf = newest(os.path.join(cw, "LG-*.pdf"))
     lp_docx = newest(os.path.join(cw, "LP-*.docx")); lp_pdf = newest(os.path.join(cw, "LP-*.pdf"))
-    assessments = sorted(glob.glob(os.path.join(repo, "assessment", "*.docx")))
+    assessments = sorted(glob.glob(os.path.join(repo, "assessment", "*.docx"))
+                         + glob.glob(os.path.join(repo, "assessment", "*.rvt")))
 
     routing = [
         ("Master Trainer Slides", "master trainer", [deck_ppt, deck_pdf]),

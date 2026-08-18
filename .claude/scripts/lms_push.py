@@ -400,9 +400,15 @@ def put_multipart(url, fields):
 def resolve_course(code):
     res = get_json(f"{API}/api/courses/list")
     courses = res.get("data", [])
-    hit = next((c for c in courses if (c.get("courseCode") or "").strip().upper() == code.upper()), None)
+    def _codes(c):
+        return {(c.get(k) or "").strip().upper()
+                for k in ("courseCode", "originalCourseCode", "newCourseCode", "currentCourseCode")}
+    hit = next((c for c in courses if code.upper() in _codes(c)), None)
     if not hit:
         raise SystemExit(f"Course code {code} not found in LMS-TMS ({len(courses)} courses listed).")
+    if (hit.get("courseCode") or "").strip().upper() != code.upper():
+        print(f"  note: {code} is this course's original code — the LMS record's current code is "
+              f"{hit.get('courseCode')} (same course, re-registered).")
     return hit["id"], hit.get("title", "")
 
 
