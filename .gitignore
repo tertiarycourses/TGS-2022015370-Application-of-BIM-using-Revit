@@ -1,0 +1,22 @@
+# WSQ assessment materials (confidential — never pushed)
+/assessment/
+/assessment\ /
+
+# Source material the project was derived from — not ours to republish.
+**/reference/
+!.claude/skills/**/reference/
+!.claude/skills/**/reference/**
+
+# Distribution archives (rebuildable — never pushed to GitHub)
+*.zip
+
+# Secrets & local state
+.env
+.env.*
+*api_key*
+.claude/settings.local.json
+
+# macOS / Office junk
+.DS_Store
+~$*
+.playwright-mcp/
